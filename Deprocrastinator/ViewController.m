@@ -73,7 +73,7 @@
         cell.backgroundColor = [UIColor greenColor];
     }
     else if ([self.toDoItemPriorityArray objectAtIndex:indexPath.row] == [NSNumber numberWithInt:2]) {
-        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [UIColor brownColor];
         cell.backgroundColor = [UIColor yellowColor];
     }
     else if ([self.toDoItemPriorityArray objectAtIndex:indexPath.row] == [NSNumber numberWithInt:3]) {
@@ -151,19 +151,33 @@
 
 - (IBAction)onEditButtonPressed:(id)sender
 {
-    UIButton *editButton = sender;
 
-    if([editButton.currentTitle isEqualToString:@"Edit List" ])
-    {
-        [editButton setTitle:@"Done" forState:UIControlStateNormal];
+//    UIButton *editButton = sender;
+//
+//    if([editButton.currentTitle isEqualToString:@"Edit List" ])
+//    {
+//        [editButton setTitle:@"Done" forState:UIControlStateNormal];
+//        [self.toDoTableView setEditing:YES animated:YES];
+//    }
+//    else if([editButton.currentTitle isEqualToString:@"Done" ])
+//    {
+//        [editButton setTitle:@"Edit List" forState:UIControlStateNormal];
+//        [self.toDoTableView setEditing:NO animated:NO];
+//    }
+
+    // *** THIS IS MUCH CLEANER THAN BELOW. USE THE EDITING BOOL PROPERTY OF THE BUTTON ****
+
+    self.editing = ! self.editing;
+
+    if (self.editing) {
+        [sender setTitle:@"Done" forState:UIControlStateNormal];
         [self.toDoTableView setEditing:YES animated:YES];
-    }
-    else if([editButton.currentTitle isEqualToString:@"Done" ])
-    {
-        [editButton setTitle:@"Edit List" forState:UIControlStateNormal];
+    }else{
+        [sender setTitle:@"Edit List" forState:UIControlStateNormal];
         [self.toDoTableView setEditing:NO animated:NO];
+
     }
-    
+
 }
 
 
@@ -196,7 +210,7 @@
             }
             else if (swipedCell.backgroundColor == [UIColor greenColor]) {
                 swipedCell.backgroundColor = [UIColor yellowColor];
-                swipedCell.textLabel.textColor = [UIColor whiteColor];
+                swipedCell.textLabel.textColor = [UIColor brownColor];
                 [self.toDoItemPriorityArray replaceObjectAtIndex:swipeIndex.row withObject:[NSNumber numberWithInt:2]];
             }
             else if (swipedCell.backgroundColor == [UIColor yellowColor]) {
